@@ -5,23 +5,23 @@ import Category from "../models/Category.js";
 
 const router = express.Router();
 
-// Add a new category
+// Adding a new category
 router.post('/', createCategory);
 
-// Get all categories
+// Getting all categories
 router.get('/', getAllCategories);
 
 router.delete("/:id", async (req, res) => {
   const { id } = req.params;
 
   try {
-    // Check if the category exists
+    // Checking if the category exists
     const category = await Category.findById(id);
     if (!category) {
       return res.status(404).json({ message: "Category not found" });
     }
 
-    // Delete the category
+    // Deleting the category
     await Category.findByIdAndDelete(id);
 
     res.status(200).json({ message: "Category deleted successfully" });
